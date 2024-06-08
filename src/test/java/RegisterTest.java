@@ -23,6 +23,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 public class RegisterTest {
     private WebDriver driver;
     User user;
+    public UserStep userStep;
 
     @Before
     public void setup() {
@@ -49,6 +50,7 @@ public class RegisterTest {
         RegisterPage registerPage = new RegisterPage(driver);
         LoginPage loginPage = new LoginPage(driver);
         ProfilePage profilePage = new ProfilePage(driver);
+        userStep = new UserStep();
         registerPage.setName(user.getName());
         registerPage.setEmail(user.getEmail());
         registerPage.setPassword(user.getPassword());
@@ -56,11 +58,11 @@ public class RegisterTest {
         MatcherAssert.assertThat(loginPage.getLoginTextFromHeader(), equalTo(ENTRANCE_MESSAGE));
         loginPage.loginUser(user);
         Assert.assertTrue(profilePage.btnProfileTabIsEnabled());
+        userStep.deleteUser(userStep.getAccessToken(userStep.loginUser(user)));
     }
 
     @After
     public void teardown() {
-        UserStep.deleteUser(UserStep.getAccessToken(user));
         driver.quit();
     }
 }

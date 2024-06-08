@@ -15,22 +15,25 @@ public class WebDriverConfig {
 
     public static WebDriver setDriver() {
 
-        WebDriver driver;
-        String browserName = System.getenv().get("browser");
-        switch (browserName) {
-            case "chrome":
-                WebDriverManager.chromedriver().setup();
-                driver = new ChromeDriver();
-                break;
-            case "yandex":
-                System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_LOCAL_PATH);
-                ChromeOptions options = new ChromeOptions();
-                options.setBinary(YANDEX_DRIVER_LOCAL_PATH);
-                driver = new ChromeDriver(options);
-                break;
-            default: throw new RuntimeException(browserName + "browser not exist. Use chrome or yandex name.");
-        }
-        return driver;
+//        WebDriver driver;
+//        String browserName = System.getenv().get("browser");
+//        switch (browserName) {
+//            case "chrome":
+//                WebDriverManager.chromedriver().setup();
+//                driver = new ChromeDriver();
+//                break;
+//            case "yandex":
+//                System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_LOCAL_PATH);
+//                ChromeOptions options = new ChromeOptions();
+//                options.setBinary(YANDEX_DRIVER_LOCAL_PATH);
+//                driver = new ChromeDriver(options);
+//                break;
+//            default: throw new RuntimeException(browserName + "browser not exist. Use chrome or yandex name.");
+//        }
+//        return driver;
+//    }
+        WebDriverManager.chromedriver().setup();
+        return new ChromeDriver();
     }
 }
 

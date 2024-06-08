@@ -21,12 +21,14 @@ public class LoginTest {
 
     private WebDriver driver;
     User user;
+    public UserStep userStep;
 
     @Before
     public void setup() {
         RestAssured.baseURI = BaseURI.BASE_URI;
         user = CreateUser.createUser();
         UserStep.createUser(user);
+        userStep = new UserStep();
 
         driver = WebDriverConfig.setDriver();
         driver.manage().timeouts().implicitlyWait(WAIT_TIMEOUT, TimeUnit.SECONDS);
@@ -81,7 +83,7 @@ public class LoginTest {
 
     @After
     public void teardown() {
-        UserStep.deleteUser(UserStep.getAccessToken(user));
         driver.quit();
+        userStep.deleteUser(userStep.getAccessToken(userStep.loginUser(user)));
     }
 }

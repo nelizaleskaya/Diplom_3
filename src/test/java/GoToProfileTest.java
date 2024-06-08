@@ -25,6 +25,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 public class GoToProfileTest {
 
     private WebDriver driver;
+    public UserStep userStep;
 
     @Before
     public void setup() {
@@ -41,11 +42,12 @@ public class GoToProfileTest {
         MainPage mainPage = new MainPage(driver);
         LoginPage loginPage = new LoginPage(driver);
         ProfilePage profilePage = new ProfilePage(driver);
+        userStep = new UserStep();
         UserStep.createUser(user);
         mainPage.clickProfileButton();
         loginPage.loginUser(user);
         Assert.assertTrue(profilePage.btnProfileTabIsEnabled());
-        UserStep.deleteUser(UserStep.getAccessToken(user));
+        userStep.deleteUser(userStep.getAccessToken(userStep.loginUser(user)));
     }
 
     @Test
