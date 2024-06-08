@@ -42,7 +42,7 @@ public class UserStep {
     }
 
     @Step("Delete an user")
-    public static void deleteUser(String accessToken) {
+    public void deleteUser(String accessToken) {
         if (accessToken != null)
             given()
                     .auth().oauth2(accessToken)
