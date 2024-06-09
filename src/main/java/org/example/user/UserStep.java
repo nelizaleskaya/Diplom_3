@@ -15,7 +15,7 @@ public class UserStep {
     public String accessToken;
     public UserCreds userCreds;
     @Step("Create an user")
-    public static Response createUser(User user) {
+    public Response createUser(User user) {
         Response response = given()
                 .header("Content-type", "application/json")
                 .and()
@@ -26,7 +26,7 @@ public class UserStep {
     }
 
     @Step("Get an user accessToken")
-    public static Response loginUser(User user) {
+    public Response loginUser(User user) {
         Response response = given()
                 .header("Content-type", "application/json")
                 .and()
